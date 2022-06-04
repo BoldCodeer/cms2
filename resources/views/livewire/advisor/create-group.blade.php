@@ -43,13 +43,13 @@
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                                 <button wire:click.prevent="store()" type="button"
-                                        class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-red-600 text-base leading-6 font-bold text-white shadow-sm hover:bg-red-700 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-                                    Store
+                                        class="flex sm:inline-flex justify-center items-center bg-green-500 hover:bg-green-600 active:bg-green-700 focus-visible:ring ring-green-300 text-white font-semibold text-center rounded-md outline-none transition duration-100 px-5 py-2">
+                                    Save
                                 </button>
                             </span>
                     <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
                                 <button wire:click="closeModal()" type="button"
-                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-bold text-gray-700 shadow-sm hover:text-gray-700 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                                        class="flex sm:inline-flex justify-center items-center bg-neutral-600 hover:bg-neutral-700 active:bg-neutral-600 focus-visible:ring ring-neutral-600 text-white font-semibold text-center rounded-md outline-none transition duration-100 px-5 py-2">
                                     Close
                                 </button>
                             </span>

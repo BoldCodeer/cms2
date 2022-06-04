@@ -10,7 +10,7 @@ class Groups extends Component
 {
     use WithPagination;
 
-    public $groups, $name, $section, $year, $course, $group_id;
+    public $name, $section, $year, $course, $group_id;
     public $isOpen = 0;
 
     /**
@@ -20,6 +20,8 @@ class Groups extends Component
      */
     public function render()
     {
+        //$searchTerm = '%'.$this->searchTerm . '%';
+        //$groups = Group::where('name', 'LIKE', $searchTerm)->get();
         $this->groups = Group::all();
         return view('livewire.advisor.groups',[
             'groups' => Group::paginate(2),
