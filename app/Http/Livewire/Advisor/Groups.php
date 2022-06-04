@@ -10,7 +10,8 @@ class Groups extends Component
 {
     use WithPagination;
 
-    public $groups, $name, $section, $year, $course, $group_id;
+    // public $groups;
+    public $name, $section, $year, $course, $group_id;
     public $isOpen = 0;
 
     /**
@@ -20,7 +21,7 @@ class Groups extends Component
      */
     public function render()
     {
-        $this->groups = Group::all();
+        // $this->groups = Group::all();
         return view('livewire.advisor.groups',[
             'groups' => Group::paginate(2),
         ]);
