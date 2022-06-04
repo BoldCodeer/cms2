@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Advisor;
 
 use Livewire\Component;
 use App\Models\Group;
+use Livewire\WithPagination;
 
 class Groups extends Component
 {
+    use WithPagination;
+
     public $groups, $name, $section, $year, $course, $group_id;
     public $isOpen = 0;
 
@@ -18,7 +21,9 @@ class Groups extends Component
     public function render()
     {
         $this->groups = Group::all();
-        return view('livewire.advisor.groups');
+        return view('livewire.advisor.groups',[
+            'groups' => Group::paginate(2),
+        ]);
     }
 
     /**
@@ -87,7 +92,7 @@ class Groups extends Component
         ]);
 
         session()->flash('message',
-            $this->group_id ? 'Group Updated Successfully.' : 'Post Created Successfully.');
+            $this->group_id ? 'Group Updated Successfully.' : 'Group Created Successfully.');
 
         $this->closeModal();
         $this->resetInputFields();
@@ -101,7 +106,7 @@ class Groups extends Component
     {
         $group = Group::findOrFail($id);
         $this->group_id = $id;
-        $this->name = $group->title;
+        $this->name = $group->name;
         $this->section = $group->section;
         $this->year = $group->year;
         $this->course = $group->course;

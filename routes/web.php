@@ -33,3 +33,7 @@ Route::get('/group', Groups::class);
 //Route::get('/group', function () {
 //    return view('livewire.advisor.home');
 //});
+
+Route::get('group-pagination', function () {
+    return view('default');
+});

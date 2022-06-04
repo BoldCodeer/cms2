@@ -61,6 +61,16 @@
         </div>
         <div class="w-full h-full p-4 m-8 overflow-y-auto">
             <h1 class="text-5xl font-semibold">Create Group</h1><br>
+            @if (session()->has('message'))
+                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
+                     role="alert">
+                    <div class="flex">
+                        <div>
+                            <p class="text-sm">{{ session('message') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <button wire:click="create()" type="button" class="flex sm:inline-flex justify-center items-center bg-green-500 hover:bg-green-600 active:bg-green-700 focus-visible:ring ring-green-300 text-white font-semibold text-center rounded-md outline-none transition duration-100 px-5 py-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Create
             </button><br>
@@ -76,57 +86,53 @@
                                         #
                                     </th>
                                     <th scope="col" class="text-sm text-white font-medium px-6 py-4 whitespace-nowrap">
-                                        First
+                                        Group Name
                                     </th>
                                     <th scope="col" class="text-sm text-white font-medium px-6 py-4 whitespace-nowrap">
-                                        Last
+                                        Section
                                     </th>
                                     <th scope="col" class="text-sm text-white font-medium px-6 py-4 whitespace-nowrap">
-                                        Handle
+                                        Year
+                                    </th>
+                                    <th scope="col" class="text-sm text-white font-medium px-6 py-4 whitespace-nowrap">
+                                        Course
+                                    </th>
+                                    <th scope="col" class="text-sm text-white font-medium px-6 py-4 whitespace-nowrap">
+                                        Action
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="bg-gray-100 border-b">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">1</td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                                        Mark
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                                        Otto
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                                        @mdo
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">2</td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                                        Jacob
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                                        Thornton
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                                        @fat
-                                    </td>
-                                </tr>
-                                <tr class="bg-gray-100 border-b">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">3</td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                                        Joy
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                                        Mera
-                                    </td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                                        @jao
-                                    </td>
-                                </tr>
-
+                                @foreach($groups as $group)
+                                    <tr class="bg-gray-100 border-b">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">{{ $group->id }}</td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
+                                            {{ $group->name }}
+                                        </td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
+                                            {{ $group->section }}
+                                        </td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
+                                            {{ $group->year }}
+                                        </td>
+                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
+                                            {{ $group->course }}
+                                        </td>
+                                        <td class="border px-4 py-2">
+                                            <button wire:click="edit({{ $group->id }})" class="flex sm:inline-flex justify-center items-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 text-white font-semibold text-center rounded-md outline-none transition duration-100 px-5 py-2 cursor-pointer ">
+                                                Edit
+                                            </button>
+                                            <button wire:click="delete({{ $group->id }})" class="flex sm:inline-flex justify-center items-center bg-gradient-to-tr from-pink-500 to-red-400 hover:from-pink-600 hover:to-red-500 active:from-pink-700 active:to-red-600 focus-visible:ring ring-pink-300 text-white font-semibold text-center rounded-md outline-none transition duration-100 px-5 py-2 cursor-pointer">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
+
+                        {{ $groups->links() }}
                     </div>
                 </div>
             </div>
