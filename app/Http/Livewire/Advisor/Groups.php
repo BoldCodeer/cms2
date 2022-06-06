@@ -12,6 +12,7 @@ class Groups extends Component
 
     public $name, $section, $year, $course, $group_id;
     public $isOpen = 0;
+    public $searchTerm = '';
 
     /**
      * The attributes that are mass assignable.
@@ -20,11 +21,20 @@ class Groups extends Component
      */
     public function render()
     {
-        //$searchTerm = '%'.$this->searchTerm . '%';
-        //$groups = Group::where('name', 'LIKE', $searchTerm)->get();
-        $this->groups = Group::all();
+        if($this->searchTerm != ''){
+            return view('livewire.advisor.groups',[
+                //'groups' => Group::where('name', $this->searchTerm)->paginate(5),
+                'groups' => Group::when($this->searchTerm, function ($query, $term){
+                    return $query->where('name', 'LIKE', "%$term%")->orderBy('name')
+                        ->orWhere('section', 'LIKE', "%$term%")->orderBy('section')
+                        ->orWhere('year', 'LIKE', "%$term%")->orderBy('year')
+                        ->orWhere('course', 'LIKE', "%$term%")->orderBy('course');
+                })->paginate(5)
+            ]);
+        }
+
         return view('livewire.advisor.groups',[
-            'groups' => Group::paginate(2),
+            'groups' => Group::paginate(5),
         ]);
     }
 
